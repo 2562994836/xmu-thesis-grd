@@ -7,23 +7,47 @@
 \chapter{绪论}
 \enchapter{Introduction}
 \label{chap:intro}
-\section{研究背景及选题意义}
+\section{研究背景及意义}
 \ensection{Research Background and Motivation}
 
-近年来，随着人们生活水平的不断提高，人们越来越注重周围环境对身体健康的影响。作为服装是人们时时刻刻最贴近的环境，尤其是内衣，对人体健康有很大的影响。由于合时刻刻最贴近的环境，尤其是内衣，对人体健康有很大的影响。由于合成纤维的衣着舒适性、手感性，天然纤维的发展又成为人们关注的一大热点。\supercite{Takahashi1996Structure,Xia2002Analysis,Jiang1989,Mao2000Motion,Feng1998}
+医疗器械研发是健康中国建设的重要内容。中共中央、国务院印发的《“健康中国2030”规划纲要》提出发展高性能医疗器械，提升新型制剂和高端医疗器械领域的创新能力。\supercite{CPCStateCouncil2016HealthyChina}国务院印发的《国民健康“十五五”规划》进一步提出加强医工协同，加大对高端医疗器械关键技术、元器件和整机研发的支持力度。\supercite{StateCouncil2026NationalHealth}
+
+肝癌是我国恶性肿瘤防治的重点之一。国际癌症研究机构发布的 GLOBOCAN 2024 数据显示，2024 年全球肝癌新发病例估计约为 84.3 万例，死亡病例约为 73.2 万例，肝癌居全球癌症死因第三位。\supercite{Sung2026GlobalCancer}国家癌症中心估计，同期我国肝癌新发病例约为 35.4 万例，死亡病例约为 30.4 万例，肝癌居我国癌症死因第二位。\supercite{Zheng2026CancerChina}全球及我国的估计病例数见图~\ref{fig:liver-cancer-burden-2024}。经动脉化疗栓塞（transarterial chemoembolization，TACE）是肝细胞癌（hepatocellular carcinoma，HCC）局部介入治疗的常用手段，通过肿瘤供血动脉递送化疗药物并实施血管栓塞。随机对照研究在符合入组条件的不可切除 HCC 患者中观察到 TACE 的生存获益，我国《原发性肝癌诊疗指南（2026年版）》也将 TACE 纳入相应分期患者的治疗方案。\supercite{Llovet2002Chemoembolisation,NHC2026LiverCancer}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/liver-cancer-burden-2024.pdf}
+  \caption{2024 年全球及中国肝癌新发与死亡病例估计数}
+  \label{fig:liver-cancer-burden-2024}
+\end{figure}
+
+传统碘油 TACE 通常将化疗药物水溶液与碘油混合成乳剂，再经导管输送至肿瘤供血动脉。由于油水两相不相溶，乳剂放置时可能发生液滴聚并或分层。实验研究表明，水相组成和油水比例会影响乳剂类型、物理稳定性及药物释放行为。\supercite{NHC2026LiverCancer,Choi2014LipiodolEmulsions,Ahnfelt2019LipiodolEmulsions}这种非均相体系的不稳定性不仅导致药物分布不均、栓塞效果难以预测，还可能引发非靶器官的毒副作用。因此，如何突破传统乳剂的物理限制，使药物在载体中实现超稳定分散甚至均相溶解，是改进此类介入制剂亟待解决的临床与工程痛点。
+
+超临界二氧化碳（supercritical carbon dioxide，scCO$_2$）的溶剂能力可通过调节温度和压力改变，降压后易于与产物分离，因而具有替代部分有机溶剂的潜力。已有研究涉及 scCO$_2$ 中增稠剂的溶解特性与增稠机理\supercite{Wang2024CO2Thickeners}、scCO$_2$ 及二氧化碳基混合工质在动力循环中的应用\supercite{Deng2025CO2PowerCycles}，以及利用 scCO$_2$ 从酸樱桃果核中提取脂质。\supercite{Kniepkamp2024CherryStoneExtraction}在 TACE 碘油制剂的制备中，可利用 scCO$_2$ 辅助混合，以改善药物在碘油中的分散状态和制剂的物理稳定性。
+
+温度和压力是 scCO$_2$ 工艺的关键操作参数。在临界点附近，密度等热物性对温度和压力的变化较为敏感，进而影响流动和传热。\supercite{Zhang2024CO2HeatTransfer}在植物种子油萃取研究中，Guta 等以种子油得率为优化目标，采用响应面法考察萃取温度、压力和时间的影响，并据此筛选工艺条件。\supercite{Guta2025KorarimaExtraction}对于碘油制剂的制备，需要根据目标药物在 scCO$_2$ 中的溶解特性筛选温压组合，并在混合过程中稳定维持所选条件，为重复制备和后续工艺放大提供基础。
+
+基于上述需求，本文从制备设备和参数优化方法两方面开展研究。在设备方面，研制面向肝癌介入制剂制备的医疗器械，即智能超稳定均相混合系统，通过多路协同控制实现混合过程的自动化运行和温压精确调节。在参数优化方面，提出基于回归排序协同强化学习的端到端温压智能优化框架（SHIFT-TPO），以特定药物在 scCO$_2$ 中的溶解度最大化为目标，在设备允许的工况范围内筛选候选温压组合。两方面的研究为碘油制剂的工艺开发提供可重复的实验条件和参数选择依据。
+
 
 \section{国内外研究现状}
 \ensection{Research Progress Overview in Home and Abroad}
 
-\subsection{国内研究现状}
+\subsection{超稳定均相混合系统研究现状}
 \ensection{Research Progress Overview in China}
-\subsection{国外研究现状}
-\ensection{Research Progress Overview in Foreign Countries}
-%\label{sec:***} 可标注label
 
-\section{主要研究内容与目标}
+% 超临界二氧化碳技术的应用（分国内国外各自领域，比如制药、化工等）
+
+
+
+\subsection{温压智能优化研究现状}
+\ensection{Research Progress Overview in Foreign Countries}
+
+% 直接用shift温压控制内容
+
+\section{主要研究内容}
 \ensection{Major Contents and Chapter Arrangement}
 
-
-\section{本文组织架构}
-\ensection{Organizational Structure of This Paper}
+% 超稳定均相混合系统设计
+% shift-tpo
+% 温压预测对比与混药实验
