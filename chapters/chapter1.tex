@@ -71,7 +71,7 @@
 
 国内在食品加工、高分子发泡和介入制剂领域均开展了相关研究。董科等将超临界二氧化碳用于红花椒油树脂萃取，分析工艺参数与提取物风味组成之间的关系\supercite{Dong2025PepperOleoresin}。宫政等以超临界二氧化碳为发泡剂制备可降解形状记忆泡沫，考察聚乳酸含量对二氧化碳扩散、泡孔结构和形状记忆性能的影响\supercite{Gong2025PBATLAFoaming}。
 
-国内制药相关装备已覆盖药物颗粒制备与原料提取两类工艺，如图~\ref{fig:domestic-supercritical-pharma-equipment} 所示。普萃超临界（广东）高新技术有限公司的实验型超临界纳米结晶设备用于药物颗粒制备及纳米制剂研发\supercite{Zhu2025PucuiEquipment}。南通华达制药设备科技有限公司的超临界二氧化碳萃取设备可用于医药原料中目标组分的提取\supercite{HuadaSupercriticalExtractor}。
+图~\ref{fig:domestic-supercritical-pharma-equipment} 为国内设备实例。普萃超临界（广东）高新技术有限公司的实验型超临界纳米结晶设备用于药物颗粒制备\supercite{Zhu2025PucuiEquipment}。南通华达制药设备科技有限公司的超临界二氧化碳萃取设备可用于医药原料提取\supercite{HuadaSupercriticalExtractor}。
 
 \begin{figure}[!htbp]
   \centering
@@ -105,9 +105,36 @@
 上述研究为碘油制剂制备提供了设备和工艺依据。现有 SHIFT 公开论文主要报告装置组成、代表性配方的制备条件及制剂表征，针对不同药物的适宜温压区间，以及升温升压、保温保压和卸压阶段的动态控制性能，仍需开展系统评价。对于包含纳米颗粒的碘油制剂，物理稳定性可通过颗粒分布、静置后分层或沉降等指标表征。基于这些研究，本文将设备的多路协同控制与候选温压组合筛选相结合，为后续制剂均匀性与批次重复性的验证提供可重复的制备条件。
 
 \subsection{温压智能优化研究现状}
-\ensection{Research Progress Overview in Foreign Countries}
+\ensubsection{Research Progress in Intelligent Temperature and Pressure Optimization}
+\label{subsec:temperature-pressure-optimization}
 
-% 直接用shift温压控制内容
+在超稳定均相混合系统中，设备的温压控制负责跟踪设定值，工艺参数优化则负责确定适合目标药物的设定值。以药物在 scCO$_2$ 中的平衡溶解度作为筛选指标时，需要在设备允许的工况范围内联合选择温度和压力。温度对溶解度的影响随压力而变。升温会降低定压下的 scCO$_2$ 密度，同时提高固体溶质的升华蒸气压，两种效应共同决定溶解度的变化方向。Sodeifian 等测得帕博西尼在 scCO$_2$ 中的平衡溶解度，如图~\ref{fig:palbociclib-temperature-pressure} 所示，在 $18\,\mathrm{MPa}$ 时升温使溶解度降低，在 $21\,\mathrm{MPa}$ 时升温则使溶解度升高。由此可见，在单一压力下得到的温度效应难以直接推广至其他工况\supercite{Sodeifian2023Palbociclib}。
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.86\textwidth]{figures/palbociclib-temperature-pressure.pdf}
+  \caption{不同温度下帕博西尼在超临界二氧化碳中的平衡溶解度\supercite{Sodeifian2023Palbociclib}}
+  \label{fig:palbociclib-temperature-pressure}
+\end{figure}
+
+（1）基于试验设计与热力学模型的参数筛选。响应面法通常先在选定的工况范围内安排试验，再用回归模型估计温度、压力等变量的主效应与交互作用。Guta 等采用 Box--Behnken 设计，以萃取温度、压力和时间为因子，获得了与实测得率相近的种子油得率预测值。国内刘国祎等在亚临界 CO$_2$ 萃取红花籽油的研究中，用同一批试验数据比较了响应面法与人工神经网络，并结合遗传算法搜索后者预测的高得率工况。这些研究说明，实验设计与模型搜索可以结合使用，但响应面及其最优点的适用性取决于物料和试验范围\supercite{Guta2025KorarimaExtraction,Liu2024SafflowerExtraction}。对于药物的平衡溶解度，Sodeifian 等采用 Peng--Robinson 状态方程描述帕博西尼与 CO$_2$ 的相平衡，利用实验数据校准模型参数。该方法可以根据相平衡关系解释操作条件对溶解度的影响，但对于缺少实测数据的药物，临界性质估算及相互作用参数的获取会限制模型应用\supercite{Sodeifian2023Palbociclib}。
+
+（2）基于数据驱动模型的溶解度预测。国内邵阳学院 Li 等以温度和压力为输入，比较了多项式回归、极端梯度提升和 LASSO 回归对氟尼酸溶解度及 scCO$_2$ 密度的预测表现。该研究以单种药物为对象，所用启发式算法优化的是模型超参数，其结果可作为工况筛选的预测依据\supercite{Li2024NiflumicAcid}。为使模型适用于多种溶质，Ji-En Li 等汇集了 116 种类药溶质的 2791 条数据，在温度、压力和 CO$_2$ 密度之外引入分子量和分子表面电荷密度分布，并比较了深度神经网络和随机森林的预测表现\supercite{Li2024MolecularSigmaProfiles}。
+
+Makarov 等进一步整合了 31975 条溶解度记录，在梯度提升模型和分子图模型中加入熔点、汽化焓及溶剂化自由能等热力学信息，并按化合物分组评估模型对新分子的预测能力\supercite{Makarov2025ThermodynamicsInformedSolubility}。Khafagy 等使用七种药物的实验数据分析了分子描述符和工况变量对预测结果的影响，并指出部分实验记录缺少共溶剂信息，限制了模型对这类工艺差异的描述\supercite{Khafagy2026InterpretableSolubility}。使用这类模型推荐工况时，还需在可行域内比较候选组合。若模型对个别工况的溶解度估计过高，预测最优点可能偏离实测溶解度较高的区域。因此，模型的总体回归精度和识别高溶解度工况的能力需要分别评价。
+
+（3）基于搜索与策略学习的工况决策。图~\ref{fig:temperature-pressure-optimization-workflows} 对比了响应面优化、固定代理模型搜索和序贯实验优化的基本流程。采用固定代理模型时，可利用已有数据拟合溶解度，再在设备范围内通过网格搜索或遗传算法选择候选点。采用序贯实验优化时，每轮将新测量结果反馈给模型或搜索算法，用于选择下一组工况。在相邻的化工应用中，Florit 等将贝叶斯优化与动态流动实验结合，并在酯水解反应中验证了该流程\supercite{Florit2025DynamicFlowBayes}。Wang 等利用多臂赌博机算法依据实验反馈分配采样次数，在三类反应中使用不足预设反应空间 $15\%$ 的样本识别出适用于多种底物的反应条件。此类研究表明，实验反馈可用于减少无效试验。对于需要达到平衡后取样的 scCO$_2$ 高压实验，逐轮更新的成本还取决于单次测量时间与可用实验次数\supercite{Wang2024BanditReaction}。
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.97\textwidth]{figures/temperature-pressure-optimization-workflows.pdf}
+  \caption{工艺参数优化的典型流程}
+  \label{fig:temperature-pressure-optimization-workflows}
+\end{figure}
+
+强化学习也被用于具有反馈的工艺决策。国内 Lou 等将近端策略优化用于药物洗脱支架的药物扩散调节，以治疗区域内的药物浓度与均匀性等指标评价策略，并比较了不同支架嵌入构型下的表现\supercite{Lou2026StentDiffusionRL}。对于 SHIFT 的平衡温压筛选，在组分和工况给定后，可用该条件下的平衡溶解度评价一次决策。基于历史数据构建奖励模型，可以减少策略训练对反复开展高压实验的依赖。
+
+已有研究为超临界工艺提供了相平衡计算、溶解度预测与实验选点方法。针对 SHIFT 中的药物工况筛选，仍需考察模型在未见药物和设备可行域收窄时，能否识别相对优良的温压组合。药物在 scCO$_2$ 中的平衡溶解度可作为初筛目标，卸压后在碘油中的分散均匀性和静置稳定性则需要通过制剂实验评价。基于上述研究，本文将给定药物和可行工况范围下的平衡温压筛选建模为单步决策，利用溶解度回归与工况排序共同构建奖励模型，并训练策略生成候选温压组合，为后续混合实验提供设定值。
 
 \section{主要研究内容}
 \ensection{Major Contents and Chapter Arrangement}
